@@ -45,7 +45,7 @@ from requests import post as _post
 from requests import get as _get
 
 # local
-from .coach import Coach
+# from .coach import Coach
 
 # logger
 logger = logging.getLogger(__name__)
@@ -122,10 +122,10 @@ class Poloniex(object):
         """
         # set logger, coach, and proxies
         self.logger = logger
-        self.coach = coach
+        # self.coach = coach
         self.proxies = proxies
-        if self.coach is True:
-            self.coach = Coach()
+        # if self.coach is True:
+        #     self.coach = Coach()
         # create nonce
         self._nonce = int("{:.6f}".format(time()).replace('.', ''))
         # json number datatypes
@@ -184,8 +184,8 @@ class Poloniex(object):
             payload['url'] = 'https://poloniex.com/tradingApi'
 
             # wait for coach
-            if self.coach:
-                self.coach.wait()
+            # if self.coach:
+            #     self.coach.wait()
 
             # set nonce
             args['nonce'] = self.nonce
@@ -218,8 +218,8 @@ class Poloniex(object):
             payload['url'] = 'https://poloniex.com/public?' + _urlencode(args)
 
             # wait for coach
-            if self.coach:
-                self.coach.wait()
+            # if self.coach:
+            #     self.coach.wait()
             # add proxies if needed
             if self.proxies:
                 payload['proxies'] = self.proxies
@@ -307,8 +307,8 @@ class Poloniex(object):
         """ Returns the past 200 trades for a given market, or up to 50,000
         trades between a range specified in UNIX timestamps by the "start" and
         "end" parameters. """
-        if self.coach:
-            self.coach.wait()
+        # if self.coach:
+        #     self.coach.wait()
         args = {'command': 'returnTradeHistory',
                 'currencyPair': str(currencyPair).upper()}
         if start:
