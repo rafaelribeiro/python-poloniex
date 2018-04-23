@@ -189,7 +189,6 @@ class Poloniex(object):
 
             # set nonce
             args['nonce'] = self.nonce
-
             # add args to payload
             payload['data'] = args
 
@@ -232,8 +231,10 @@ class Poloniex(object):
     @property
     def nonce(self):
         """ Increments the nonce"""
-        self._nonce += 42
-        return self._nonce
+        from db.security import IncrementOnlyNonce
+        # self._nonce += 42
+        # return self._nonce
+        return IncrementOnlyNonce.get_nonce('poloniex')
 
     def _checkCmd(self, command):
         """ Returns if the command is private of public, raises PoloniexError
